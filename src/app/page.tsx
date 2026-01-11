@@ -147,12 +147,12 @@ const certifications = [
   },
 ];
 
-// Stats data - updated with horticultural focus
+// Stats data - CORRECTED to reflect actual Greenwood enterprise scale
 const stats = [
-  { value: "45+", label: "Years Growing Excellence", icon: Building2 },
-  { value: "500K+", label: "Plants Supplied Annually", icon: TreePine },
+  { value: "50+", label: "Years Horticultural Heritage", icon: Building2 },
+  { value: "6M+", label: "Plants Supplied Annually", icon: TreePine },
   { value: "200+", label: "Acres Under Cultivation", icon: Mountain },
-  { value: "6", label: "UK Nursery Sites", icon: Sprout },
+  { value: "6", label: "International Production Sites", icon: Sprout },
 ];
 
 // Live nursery stock - dynamic counters
@@ -373,12 +373,11 @@ export default function GreenwoodDemo() {
               <br className="hidden sm:block" />Contract Growing
             </h2>
 
-            {/* Subheadline */}
+            {/* Subheadline - Updated with accurate enterprise scale */}
             <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed px-4">
-              200+ acres of production across 6 UK nurseries. Award-winning growers of
-              rare varieties and{" "}
-              <span className="text-electric-cyan">biosecurity-certified stock</span> for
-              large-scale infrastructure projects.
+              A legacy of growth. Over 50 years of horticultural heritage, supplying{" "}
+              <span className="text-electric-cyan">6 million plants annually</span> across
+              200+ acres. Managing 6 international sites with audit-ready precision.
             </p>
 
             {/* CTA Buttons */}
