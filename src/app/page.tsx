@@ -33,6 +33,7 @@ import {
   CircleDot,
   TrendingUp,
   Layers,
+  Lock,
 } from "lucide-react";
 
 // Genetic Plant Specialist mock conversation - technical planting queries
@@ -365,6 +366,59 @@ export default function GreenwoodDemo() {
                 <Sprout className="w-5 h-5" />
                 <span>Contract Growing Enquiry</span>
               </button>
+            </div>
+
+            {/* Hero Certification Badges - Plant Healthy, HTA, BALI */}
+            <div className="mt-10 md:mt-12">
+              <p className="text-xs text-gray-500 uppercase tracking-wider mb-4">Certified & Accredited</p>
+              <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
+                {/* Plant Healthy - Primary Badge */}
+                <div className="group relative flex items-center gap-3 px-5 py-3 bg-gradient-to-r from-green-900/40 to-green-800/20 border-2 border-green-500/50 rounded-xl hover:border-green-400 transition-all cursor-pointer">
+                  <div className="absolute -top-2 -right-2 px-2 py-0.5 bg-green-500 text-[9px] font-bold text-white rounded-full">
+                    BIOSECURITY
+                  </div>
+                  <div className="p-2 bg-green-500/20 rounded-lg">
+                    <Shield className="w-5 h-5 md:w-6 md:h-6 text-green-400" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-sm md:text-base font-bold text-white">Plant Healthy</div>
+                    <div className="text-[10px] md:text-xs text-green-400">Pest & Disease-Free Certified</div>
+                  </div>
+                </div>
+
+                {/* HTA Badge */}
+                <div className="group flex items-center gap-3 px-4 py-3 bg-greenwood-card/60 border border-forest-green/40 rounded-xl hover:border-electric-cyan/40 transition-all cursor-pointer">
+                  <div className="p-2 bg-forest-green/20 rounded-lg">
+                    <Award className="w-5 h-5 text-electric-cyan" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-sm font-bold text-white">HTA Member</div>
+                    <div className="text-[10px] text-gray-400">Horticultural Trades</div>
+                  </div>
+                </div>
+
+                {/* BALI Badge */}
+                <div className="group flex items-center gap-3 px-4 py-3 bg-greenwood-card/60 border border-forest-green/40 rounded-xl hover:border-electric-cyan/40 transition-all cursor-pointer">
+                  <div className="p-2 bg-forest-green/20 rounded-lg">
+                    <Leaf className="w-5 h-5 text-electric-cyan" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-sm font-bold text-white">BALI Accredited</div>
+                    <div className="text-[10px] text-gray-400">Landscape Industries</div>
+                  </div>
+                </div>
+
+                {/* Peat-Free Award */}
+                <div className="group flex items-center gap-3 px-4 py-3 bg-greenwood-card/60 border border-electric-cyan/30 rounded-xl hover:border-electric-cyan/50 transition-all cursor-pointer">
+                  <div className="p-2 bg-electric-cyan/10 rounded-lg">
+                    <TreePine className="w-5 h-5 text-electric-cyan" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-sm font-bold text-white">HTA Award</div>
+                    <div className="text-[10px] text-electric-cyan">Peat-Free Grower of the Year</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -767,9 +821,63 @@ export default function GreenwoodDemo() {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Future-Proof Digital Infrastructure Bar */}
+      <section className="py-6 bg-gradient-to-r from-greenwood-dark via-forest-dark to-greenwood-dark border-t border-forest-green/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-electric-cyan/10 rounded-lg">
+                <Lock className="w-5 h-5 text-electric-cyan" />
+              </div>
+              <div className="text-left">
+                <p className="text-sm text-white font-medium">
+                  Digital Infrastructure Built to <span className="text-electric-cyan">ISO 27001</span> Standards
+                </p>
+                <p className="text-xs text-gray-400">
+                  Supporting our journey to ISO 14001 Environmental Management certification
+                </p>
+              </div>
+            </div>
+            <div className="hidden md:block w-px h-8 bg-forest-green/40" />
+            <div className="flex items-center gap-2 px-4 py-2 bg-forest-green/10 border border-forest-green/30 rounded-full">
+              <Sparkles className="w-4 h-4 text-electric-cyan" />
+              <span className="text-xs text-gray-300">Enterprise-Ready Digital Platform</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer with Trust Bar */}
       <footer className="py-12 bg-greenwood-card/30 border-t border-forest-green/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Trust Bar - HTA & BALI */}
+          <div className="mb-8 pb-8 border-b border-forest-green/30">
+            <p className="text-xs text-gray-500 uppercase tracking-wider text-center mb-4">Industry Accreditations</p>
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
+              {/* Plant Healthy */}
+              <div className="flex items-center gap-2 px-4 py-2 bg-green-900/20 border border-green-500/30 rounded-lg">
+                <Shield className="w-4 h-4 text-green-400" />
+                <span className="text-sm text-white font-medium">Plant Healthy</span>
+                <span className="text-[10px] text-green-400 bg-green-500/20 px-2 py-0.5 rounded-full">Biosecurity</span>
+              </div>
+              {/* HTA */}
+              <div className="flex items-center gap-2 px-4 py-2 bg-greenwood-dark/50 border border-forest-green/30 rounded-lg">
+                <Award className="w-4 h-4 text-electric-cyan" />
+                <span className="text-sm text-white font-medium">HTA Member</span>
+              </div>
+              {/* BALI */}
+              <div className="flex items-center gap-2 px-4 py-2 bg-greenwood-dark/50 border border-forest-green/30 rounded-lg">
+                <Leaf className="w-4 h-4 text-electric-cyan" />
+                <span className="text-sm text-white font-medium">BALI Accredited</span>
+              </div>
+              {/* AIPH */}
+              <div className="flex items-center gap-2 px-4 py-2 bg-greenwood-dark/50 border border-electric-cyan/30 rounded-lg">
+                <Globe className="w-4 h-4 text-electric-cyan" />
+                <span className="text-sm text-white font-medium">AIPH International Grower</span>
+              </div>
+            </div>
+          </div>
+
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-forest-green to-electric-cyan flex items-center justify-center">
@@ -783,8 +891,8 @@ export default function GreenwoodDemo() {
 
             <div className="flex items-center gap-4 text-xs text-gray-500">
               <span className="flex items-center gap-1">
-                <Shield className="w-3 h-3" />
-                Plant Healthy Certified
+                <TreePine className="w-3 h-3" />
+                100% Peat-Free Since 2022
               </span>
               <span>•</span>
               <span>HTA Peat-Free Grower of the Year</span>
