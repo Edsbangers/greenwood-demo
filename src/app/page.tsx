@@ -4,13 +4,11 @@ import { useState, useEffect } from "react";
 import {
   Leaf,
   Globe,
-  ChevronDown,
   MessageCircle,
   Send,
   X,
   Shield,
   Award,
-  Lock,
   TreePine,
   MapPin,
   Calendar,
@@ -25,115 +23,150 @@ import {
   Menu,
   ExternalLink,
   Bot,
+  Sprout,
+  FlaskConical,
+  Bug,
+  Wind,
+  Droplets,
+  Sun,
+  Mountain,
+  CircleDot,
+  TrendingUp,
+  Layers,
 } from "lucide-react";
 
-// Mock chat messages for the AI assistant demo
+// Genetic Plant Specialist mock conversation - technical planting queries
 const mockConversation = [
   {
     role: "user",
-    message: "Do you have peat-free shrubs available for a site in Belgium?",
+    message: "What works for a high-wind coastal project in Portsmouth?",
     time: "23:47",
   },
   {
     role: "assistant",
     message:
-      "Good evening! Yes, we have excellent peat-free options. From our Holland facility, we can supply:\n\n• Hydrangea paniculata (50+ available)\n• Viburnum tinus (120+ available)\n• Prunus laurocerasus (80+ available)\n\nAll grown in our certified peat-free substrate. Delivery to Belgium typically takes 2-3 business days. Would you like a formal quote?",
+      "Great question! For coastal Portsmouth, you need salt-tolerant, wind-resistant species. From our current stock:\n\n🌿 **Salt-Tolerant Shrubs:**\n• Elaeagnus x ebbingei (180+ available) - Hardy to -15°C\n• Griselinia littoralis (240+ available) - Excellent windbreak\n• Olearia traversii (90+ available) - NZ native, tough\n\n🌳 **Specimen Trees:**\n• Quercus ilex (Holm Oak) - Ultimate coastal resilience\n• Pinus nigra - Salt spray tolerant to Zone 5\n\nAll grown peat-free at our UK nurseries with Plant Healthy certification. Shall I prepare a planting plan with hardiness zones mapped?",
     time: "23:47",
   },
 ];
 
-// Project data for the news grid
+// Project data - updated with horticultural terminology
 const projects = [
   {
     id: 1,
-    title: "Amsterdam Central Station Renovation",
+    title: "Amsterdam Central Station Plaza",
     location: "Netherlands",
-    category: "Urban Landscaping",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop",
+    category: "Infrastructure Planting",
+    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=400&fit=crop",
     date: "December 2024",
-    description: "12,000 native plants installed across the new plaza development",
+    plants: "12,000+",
+    description: "Native species palette with Betula, Cornus & ornamental grasses for urban biodiversity",
   },
   {
     id: 2,
     title: "Manchester Biophilic Office Complex",
     location: "United Kingdom",
-    category: "Commercial",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop",
+    category: "Commercial Greening",
+    image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&h=400&fit=crop",
     date: "November 2024",
-    description: "Living walls and rooftop gardens for BREEAM Excellent certification",
+    plants: "8,500+",
+    description: "Living walls featuring Hedera, Ferns & shade-tolerant perennials for BREEAM Excellent",
   },
   {
     id: 3,
     title: "Rotterdam Climate-Adaptive Park",
     location: "Netherlands",
-    category: "Public Spaces",
+    category: "Public Realm",
     image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600&h=400&fit=crop",
     date: "October 2024",
-    description: "Sustainable water management with 5,000+ native species",
+    plants: "5,000+",
+    description: "Rain garden species & native wetland planting for sustainable water management",
   },
   {
     id: 4,
-    title: "Edinburgh Royal Mile Heritage Gardens",
+    title: "Edinburgh Heritage Gardens",
     location: "United Kingdom",
-    category: "Heritage",
-    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=400&fit=crop",
+    category: "Heritage Restoration",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop",
     date: "September 2024",
-    description: "Historic restoration using period-appropriate planting schemes",
+    plants: "3,200+",
+    description: "Period-authentic Rosa, Lavandula & topiary specimens for historic estate",
   },
   {
     id: 5,
     title: "Brussels EU Quarter Green Corridor",
     location: "Belgium",
-    category: "Infrastructure",
-    image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&h=400&fit=crop",
+    category: "Biodiversity Corridor",
+    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=400&fit=crop",
     date: "August 2024",
-    description: "Biodiversity corridor connecting 3 major urban parks",
+    plants: "15,000+",
+    description: "Pollinator-friendly natives connecting three major urban parks",
   },
   {
     id: 6,
     title: "London Canary Wharf Terraces",
     location: "United Kingdom",
-    category: "Commercial",
+    category: "Rooftop Planting",
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop",
     date: "July 2024",
-    description: "Premium rooftop gardens for Grade A office development",
+    plants: "4,800+",
+    description: "Wind-tolerant specimen Acers & evergreen screening for Grade A development",
   },
 ];
 
-// ISO certifications data
+// ACTUAL Greenwood certifications - verified from their website
 const certifications = [
   {
-    code: "ISO 9001",
-    title: "Quality Management",
-    icon: Award,
-    description: "Consistent quality across all operations",
-  },
-  {
-    code: "ISO 14001",
-    title: "Environmental Management",
-    icon: Leaf,
-    description: "Sustainable practices & carbon reduction",
-  },
-  {
-    code: "ISO 45001",
-    title: "Health & Safety",
+    code: "Plant Healthy",
+    title: "Biosecurity Certified",
     icon: Shield,
-    description: "Zero-harm workplace commitment",
+    description: "Audited across all 6 UK nursery sites for pest & disease-free stock",
+    verified: "2024",
   },
   {
-    code: "ISO 27001",
-    title: "Information Security",
-    icon: Lock,
-    description: "Enterprise-grade data protection",
+    code: "HTA Member",
+    title: "Horticultural Trades",
+    icon: Award,
+    description: "Full membership of the Horticultural Trades Association",
+    verified: "Active",
+  },
+  {
+    code: "BALI",
+    title: "Landscape Industries",
+    icon: Leaf,
+    description: "British Association of Landscape Industries accredited",
+    verified: "Active",
+  },
+  {
+    code: "AIPH Winner",
+    title: "International Grower",
+    icon: Globe,
+    description: "International Grower of the Year award recipient",
+    verified: "2023",
   },
 ];
 
-// Stats data
+// Stats data - updated with horticultural focus
 const stats = [
-  { value: "30+", label: "Years Experience", icon: Building2 },
+  { value: "45+", label: "Years Growing Excellence", icon: Building2 },
   { value: "500K+", label: "Plants Supplied Annually", icon: TreePine },
-  { value: "3", label: "European Locations", icon: Globe },
-  { value: "150+", label: "Expert Team Members", icon: Users },
+  { value: "200+", label: "Acres Under Cultivation", icon: Mountain },
+  { value: "6", label: "UK Nursery Sites", icon: Sprout },
+];
+
+// Live nursery stock - dynamic counters
+const liveStock = [
+  { species: "Specimen Trees", count: 12847, trend: "+234", icon: TreePine },
+  { species: "Shrubs & Hedging", count: 89432, trend: "+1.2K", icon: Layers },
+  { species: "Perennials", count: 45210, trend: "+890", icon: Sprout },
+  { species: "Ornamental Grasses", count: 23156, trend: "+456", icon: Wind },
+];
+
+// Contract growing stats
+const contractStats = [
+  { label: "Active Contract Orders", value: "47", icon: TrendingUp },
+  { label: "Hectares in Production", value: "82", icon: Mountain },
+  { label: "Species in Cultivation", value: "1,200+", icon: FlaskConical },
 ];
 
 export default function GreenwoodDemo() {
@@ -143,11 +176,25 @@ export default function GreenwoodDemo() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
   const [showChatBubble, setShowChatBubble] = useState(false);
+  const [stockCounts, setStockCounts] = useState(liveStock);
 
   // Show chat bubble after a delay
   useEffect(() => {
     const timer = setTimeout(() => setShowChatBubble(true), 2000);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Simulate live stock updates
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStockCounts((prev) =>
+        prev.map((item) => ({
+          ...item,
+          count: item.count + Math.floor(Math.random() * 10) - 3,
+        }))
+      );
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   // Simulate typing indicator
@@ -159,9 +206,9 @@ export default function GreenwoodDemo() {
   }, [chatOpen]);
 
   const regions = [
-    { id: "uk", name: "Greenwood UK", flag: "🇬🇧", tagline: "Landscaping Excellence" },
-    { id: "holland", name: "Greenwood Holland", flag: "🇳🇱", tagline: "Wholesale Nursery" },
-    { id: "plants", name: "Greenwood Plants", flag: "🌿", tagline: "Specialist Growers" },
+    { id: "uk", name: "Greenwood UK", flag: "🇬🇧", tagline: "Six Nursery Sites" },
+    { id: "holland", name: "Greenwood Holland", flag: "🇳🇱", tagline: "Tree Centre Opheusden" },
+    { id: "plants", name: "Greenwood Plants", flag: "🌿", tagline: "Specimen Growers" },
   ];
 
   return (
@@ -180,7 +227,7 @@ export default function GreenwoodDemo() {
                   Greenwood <span className="text-electric-cyan">Group</span>
                 </h1>
                 <p className="text-[10px] md:text-xs text-gray-400 hidden sm:block">
-                  Unified Excellence Across Europe
+                  Specimen Growers & Landscape Suppliers
                 </p>
               </div>
             </div>
@@ -216,10 +263,10 @@ export default function GreenwoodDemo() {
             <div className="hidden md:flex items-center gap-3">
               <button className="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors">
                 <Phone className="w-4 h-4" />
-                <span>Contact</span>
+                <span>Trade Enquiries</span>
               </button>
               <button className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-forest-green to-forest-dark text-white text-sm font-medium rounded-full border border-electric-cyan/30 hover:border-electric-cyan/60 transition-all glow-cyan">
-                <span>Get Quote</span>
+                <span>Request Planting Quote</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -252,21 +299,34 @@ export default function GreenwoodDemo() {
               </div>
               <div className="mt-4 pt-4 border-t border-forest-green/30 flex flex-col gap-2">
                 <button className="w-full py-3 text-gray-300 hover:text-white transition-colors">
-                  Contact Us
+                  Trade Enquiries
                 </button>
                 <button className="w-full py-3 bg-gradient-to-r from-forest-green to-forest-dark text-white font-medium rounded-full border border-electric-cyan/30">
-                  Get Quote
+                  Request Planting Quote
                 </button>
+              </div>
+              {/* Mobile audit badge */}
+              <div className="mt-4 pt-4 border-t border-forest-green/30">
+                <div className="flex items-center gap-2 text-xs text-electric-cyan">
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <span>Audit-Optimised Mobile Interface</span>
+                </div>
               </div>
             </div>
           )}
         </div>
       </header>
 
-      {/* Hero Section */}
+      {/* Hero Section - Specimen Nursery Aesthetic */}
       <section className="relative pt-24 md:pt-32 pb-16 md:pb-24 overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute inset-0 bg-gradient-to-br from-forest-dark via-greenwood-dark to-greenwood-dark" />
+        {/* Background - Nursery/botanical aesthetic */}
+        <div className="absolute inset-0">
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-20"
+            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920&h=1080&fit=crop')" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-greenwood-dark via-greenwood-dark/95 to-forest-dark" />
+        </div>
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-electric-cyan/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-forest-green/10 rounded-full blur-3xl" />
 
@@ -274,35 +334,36 @@ export default function GreenwoodDemo() {
           <div className="text-center max-w-4xl mx-auto">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-forest-green/20 border border-forest-green/40 rounded-full text-sm text-electric-cyan mb-6 md:mb-8">
-              <Sparkles className="w-4 h-4" />
-              <span>Now with 24/7 AI-Powered Support</span>
+              <FlaskConical className="w-4 h-4" />
+              <span>Genetic Plant Specialist AI • 24/7 Planting Advice</span>
             </div>
 
             {/* Main Headline */}
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 md:mb-6">
-              Europe&apos;s Leading{" "}
+              Specimen Trees &{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-forest-green via-electric-cyan to-forest-green animate-gradient">
-                Horticulture
+                Peat-Free
               </span>{" "}
-              <br className="hidden sm:block" />& Landscaping Group
+              <br className="hidden sm:block" />Contract Growing
             </h2>
 
             {/* Subheadline */}
             <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed px-4">
-              Three powerhouse brands. One unified mission. From wholesale nurseries to
-              complete landscape solutions—delivered with{" "}
-              <span className="text-electric-cyan">ISO-certified excellence</span>.
+              200+ acres of production across 6 UK nurseries. Award-winning growers of
+              rare varieties and{" "}
+              <span className="text-electric-cyan">biosecurity-certified stock</span> for
+              large-scale infrastructure projects.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-electric-cyan to-forest-green text-white font-semibold rounded-full hover:shadow-lg hover:shadow-electric-cyan/20 transition-all">
-                <span>Explore Our Services</span>
+                <span>Browse Specimen Catalogue</span>
                 <ArrowRight className="w-5 h-5" />
               </button>
               <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-transparent border border-forest-green/50 text-white font-medium rounded-full hover:bg-forest-green/10 hover:border-forest-green transition-all">
-                <Globe className="w-5 h-5" />
-                <span>View Locations</span>
+                <Sprout className="w-5 h-5" />
+                <span>Contract Growing Enquiry</span>
               </button>
             </div>
           </div>
@@ -329,15 +390,59 @@ export default function GreenwoodDemo() {
         </div>
       </section>
 
-      {/* Compliance / Trust Bar */}
-      <section className="py-12 md:py-16 bg-gradient-to-r from-greenwood-card via-forest-dark/50 to-greenwood-card border-y border-forest-green/30">
+      {/* Live Nursery Feed Section */}
+      <section className="py-12 md:py-16 bg-greenwood-card/30 border-y border-forest-green/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-green-500/20 border border-green-500/40 rounded-full text-xs text-green-400 mb-3">
+                <CircleDot className="w-3 h-3 animate-pulse" />
+                <span>Live from the Nursery</span>
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold text-white">Real-Time Stock Availability</h3>
+              <p className="text-sm text-gray-400 mt-1">Updated every 5 minutes across all 6 UK sites</p>
+            </div>
+            <div className="flex items-center gap-4">
+              {contractStats.map((stat, index) => (
+                <div key={index} className="text-center px-4 py-2 bg-greenwood-dark/50 rounded-xl border border-forest-green/30">
+                  <div className="text-lg md:text-xl font-bold text-electric-cyan">{stat.value}</div>
+                  <div className="text-[10px] md:text-xs text-gray-400">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {stockCounts.map((item, index) => (
+              <div
+                key={index}
+                className="group p-4 md:p-5 bg-greenwood-dark/50 border border-forest-green/30 rounded-2xl hover:border-electric-cyan/30 transition-all"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="p-2 bg-forest-green/20 rounded-lg">
+                    <item.icon className="w-5 h-5 text-electric-cyan" />
+                  </div>
+                  <span className="text-xs text-green-400 font-medium">{item.trend} this week</span>
+                </div>
+                <div className="text-2xl md:text-3xl font-bold text-white mb-1">
+                  {item.count.toLocaleString()}
+                </div>
+                <div className="text-sm text-gray-400">{item.species}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications / Trust Bar - ACTUAL Greenwood credentials */}
+      <section className="py-12 md:py-16 bg-gradient-to-r from-greenwood-card via-forest-dark/50 to-greenwood-card border-b border-forest-green/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 md:mb-12">
             <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-              Audit-Ready. Always Compliant.
+              Award-Winning. Biosecurity Certified.
             </h3>
             <p className="text-sm md:text-base text-gray-400">
-              Trusted by enterprises who demand the highest standards
+              Trusted by enterprises who demand the highest horticultural standards
             </p>
           </div>
 
@@ -355,7 +460,7 @@ export default function GreenwoodDemo() {
                     <div className="p-2 md:p-3 bg-forest-green/30 rounded-xl group-hover:bg-electric-cyan/20 transition-colors">
                       <cert.icon className="w-5 h-5 md:w-6 md:h-6 text-electric-cyan" />
                     </div>
-                    <div className="text-lg md:text-xl font-bold text-white">{cert.code}</div>
+                    <div className="text-sm md:text-base font-bold text-white">{cert.code}</div>
                   </div>
                   <h4 className="text-sm md:text-base font-semibold text-white mb-1">{cert.title}</h4>
                   <p className="text-xs md:text-sm text-gray-400">{cert.description}</p>
@@ -363,31 +468,57 @@ export default function GreenwoodDemo() {
                   {/* Verified badge */}
                   <div className="mt-3 md:mt-4 flex items-center gap-1.5 text-xs text-electric-cyan">
                     <CheckCircle2 className="w-3.5 h-3.5" />
-                    <span>Verified & Current</span>
+                    <span>Verified {cert.verified}</span>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+
+          {/* Biosecurity & Plant Health Special Badge */}
+          <div className="mt-8 p-4 md:p-6 bg-gradient-to-r from-forest-green/20 via-greenwood-dark to-forest-green/20 border border-forest-green/40 rounded-2xl">
+            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-green-500/20 rounded-xl">
+                  <Bug className="w-6 h-6 text-green-400" />
+                </div>
+                <div className="p-3 bg-electric-cyan/20 rounded-xl">
+                  <Shield className="w-6 h-6 text-electric-cyan" />
+                </div>
+              </div>
+              <div className="text-center md:text-left flex-1">
+                <h4 className="text-lg font-bold text-white mb-1">Biosecurity & Plant Health Excellence</h4>
+                <p className="text-sm text-gray-400">
+                  Our nurseries are audited to the highest biosecurity standards via Plant Healthy certification.
+                  All 12,000+ plants installed at projects like Amsterdam Central are verified pest and disease-free
+                  through our G-Cycle sustainability programme.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 bg-green-500/20 border border-green-500/40 rounded-full">
+                <CheckCircle2 className="w-4 h-4 text-green-400" />
+                <span className="text-sm text-green-400 font-medium">100% Peat-Free</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Latest Projects Grid */}
+      {/* Project & Planting Case Studies Grid */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-8 md:mb-12 gap-4">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-forest-green/20 border border-forest-green/40 rounded-full text-xs text-electric-cyan mb-3 md:mb-4">
                 <Sparkles className="w-3 h-3" />
-                <span>Auto-Updated</span>
+                <span>Auto-Updated Feed</span>
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-white">Latest Projects</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-white">Project & Planting Case Studies</h3>
               <p className="text-sm md:text-base text-gray-400 mt-2">
-                Excellence delivered across Europe
+                Species-specific solutions delivered across Europe
               </p>
             </div>
             <button className="flex items-center gap-2 px-5 py-2.5 border border-forest-green/50 text-white text-sm font-medium rounded-full hover:bg-forest-green/10 transition-colors">
-              <span>View All Projects</span>
+              <span>View Full Portfolio</span>
               <ExternalLink className="w-4 h-4" />
             </button>
           </div>
@@ -409,6 +540,11 @@ export default function GreenwoodDemo() {
                   {/* Category badge */}
                   <div className="absolute top-4 left-4 px-3 py-1 bg-greenwood-dark/80 backdrop-blur-sm border border-forest-green/40 rounded-full text-xs text-electric-cyan">
                     {project.category}
+                  </div>
+                  {/* Plant count badge */}
+                  <div className="absolute top-4 right-4 px-3 py-1 bg-forest-green/80 backdrop-blur-sm rounded-full text-xs text-white flex items-center gap-1">
+                    <Sprout className="w-3 h-3" />
+                    {project.plants}
                   </div>
                 </div>
 
@@ -434,7 +570,7 @@ export default function GreenwoodDemo() {
                   </p>
 
                   <button className="mt-4 flex items-center gap-2 text-sm text-electric-cyan hover:gap-3 transition-all">
-                    <span>View Case Study</span>
+                    <span>View Planting Specification</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -444,15 +580,15 @@ export default function GreenwoodDemo() {
         </div>
       </section>
 
-      {/* Regional Brands Section */}
+      {/* Regional Brands Section - Updated with horticultural terminology */}
       <section className="py-16 md:py-24 bg-greenwood-card/30 border-y border-forest-green/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
-              One Group. Three Specialists.
+              One Group. Three Specialist Divisions.
             </h3>
             <p className="text-sm md:text-base text-gray-400 max-w-2xl mx-auto">
-              Seamlessly connected across borders for complete horticultural solutions
+              Seamless phytosanitary compliance and logistics from Holland to UK
             </p>
           </div>
 
@@ -463,19 +599,24 @@ export default function GreenwoodDemo() {
                 <div className="text-4xl">🇬🇧</div>
                 <div>
                   <h4 className="text-lg md:text-xl font-bold text-white">Greenwood UK</h4>
-                  <p className="text-sm text-electric-cyan">Full-Service Landscaping</p>
+                  <p className="text-sm text-electric-cyan">Six Production Nurseries</p>
                 </div>
               </div>
               <ul className="space-y-3 mb-6">
-                {["Commercial Landscaping", "Estate Management", "Urban Greening", "Sports Turf"].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-gray-300">
-                    <CheckCircle2 className="w-4 h-4 text-forest-green flex-shrink-0" />
-                    <span>{item}</span>
+                {[
+                  { text: "Commercial Landscape Supply", icon: Building2 },
+                  { text: "Infrastructure Planting", icon: Mountain },
+                  { text: "Biodiversity Schemes", icon: Sprout },
+                  { text: "Sports Turf & Amenity", icon: Layers },
+                ].map((item) => (
+                  <li key={item.text} className="flex items-center gap-2 text-sm text-gray-300">
+                    <item.icon className="w-4 h-4 text-forest-green flex-shrink-0" />
+                    <span>{item.text}</span>
                   </li>
                 ))}
               </ul>
               <button className="w-full py-3 border border-forest-green/50 text-white text-sm font-medium rounded-full hover:bg-forest-green/10 transition-colors">
-                Explore UK Services
+                Explore UK Nurseries
               </button>
             </div>
 
@@ -485,42 +626,105 @@ export default function GreenwoodDemo() {
                 <div className="text-4xl">🇳🇱</div>
                 <div>
                   <h4 className="text-lg md:text-xl font-bold text-white">Greenwood Holland</h4>
-                  <p className="text-sm text-electric-cyan">European Distribution Hub</p>
+                  <p className="text-sm text-electric-cyan">Tree Centre Opheusden</p>
                 </div>
               </div>
               <ul className="space-y-3 mb-6">
-                {["Wholesale Nursery", "EU-Wide Delivery", "Trade Supplies", "Climate Logistics"].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-gray-300">
-                    <CheckCircle2 className="w-4 h-4 text-forest-green flex-shrink-0" />
-                    <span>{item}</span>
+                {[
+                  { text: "EU Import/Export Hub", icon: Globe },
+                  { text: "Phytosanitary Handling", icon: Shield },
+                  { text: "Climate-Controlled Logistics", icon: Truck },
+                  { text: "Trade Wholesale", icon: TrendingUp },
+                ].map((item) => (
+                  <li key={item.text} className="flex items-center gap-2 text-sm text-gray-300">
+                    <item.icon className="w-4 h-4 text-forest-green flex-shrink-0" />
+                    <span>{item.text}</span>
                   </li>
                 ))}
               </ul>
               <button className="w-full py-3 border border-forest-green/50 text-white text-sm font-medium rounded-full hover:bg-forest-green/10 transition-colors">
-                Explore Holland Services
+                Explore Holland Operations
               </button>
             </div>
 
-            {/* Greenwood Plants */}
-            <div className="group p-6 md:p-8 bg-greenwood-dark border border-forest-green/30 rounded-2xl hover:border-electric-cyan/30 transition-all">
+            {/* Greenwood Plants - Specimen Grower Focus */}
+            <div className="group p-6 md:p-8 bg-greenwood-dark border border-electric-cyan/30 rounded-2xl hover:border-electric-cyan/50 transition-all relative overflow-hidden">
+              {/* Special highlight for Plants division */}
+              <div className="absolute top-0 right-0 px-3 py-1 bg-electric-cyan/20 text-xs text-electric-cyan rounded-bl-xl">
+                Specimen Specialists
+              </div>
+
               <div className="flex items-center gap-4 mb-4 md:mb-6">
                 <div className="text-4xl">🌿</div>
                 <div>
                   <h4 className="text-lg md:text-xl font-bold text-white">Greenwood Plants</h4>
-                  <p className="text-sm text-electric-cyan">Specialist Growers</p>
+                  <p className="text-sm text-electric-cyan">Specimen Tree & Peat-Free Contract Growing</p>
                 </div>
               </div>
               <ul className="space-y-3 mb-6">
-                {["Specimen Trees", "Rare Varieties", "Contract Growing", "Peat-Free Range"].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-gray-300">
-                    <CheckCircle2 className="w-4 h-4 text-forest-green flex-shrink-0" />
-                    <span>{item}</span>
+                {[
+                  { text: "Rare & Specimen Varieties", icon: TreePine },
+                  { text: "100% Peat-Free Production", icon: Leaf },
+                  { text: "Contract Growing Service", icon: FlaskConical },
+                  { text: "Hardiness Zone Expertise", icon: Sun },
+                ].map((item) => (
+                  <li key={item.text} className="flex items-center gap-2 text-sm text-gray-300">
+                    <item.icon className="w-4 h-4 text-electric-cyan flex-shrink-0" />
+                    <span>{item.text}</span>
                   </li>
                 ))}
               </ul>
-              <button className="w-full py-3 border border-forest-green/50 text-white text-sm font-medium rounded-full hover:bg-forest-green/10 transition-colors">
-                Explore Plant Catalogue
+              <button className="w-full py-3 bg-gradient-to-r from-forest-green to-forest-dark border border-electric-cyan/30 text-white text-sm font-medium rounded-full hover:border-electric-cyan/60 transition-colors">
+                Browse Specimen Catalogue
               </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* G-Cycle Sustainability Section */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative p-6 md:p-10 bg-gradient-to-br from-forest-dark via-greenwood-card to-forest-dark border border-forest-green/40 rounded-3xl overflow-hidden">
+            {/* Background pattern */}
+            <div className="absolute inset-0 opacity-5">
+              <div className="absolute inset-0" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300d4ff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }} />
+            </div>
+
+            <div className="relative flex flex-col md:flex-row items-center gap-8">
+              <div className="flex-shrink-0">
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-forest-green to-electric-cyan flex items-center justify-center">
+                  <div className="text-center">
+                    <Leaf className="w-10 h-10 md:w-12 md:h-12 text-white mx-auto" />
+                    <span className="text-xs text-white/80 font-medium">G-Cycle</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex-1 text-center md:text-left">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                  G-Cycle Sustainability Programme
+                </h3>
+                <p className="text-gray-400 mb-6">
+                  Greenwood Group is committed to a net-zero future. Our G-Cycle initiative encompasses
+                  100% peat-free production, biodiversity-enhancing plant palettes, and carbon-conscious
+                  logistics across our Holland-to-UK supply chain.
+                </p>
+                <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
+                  <div className="flex items-center gap-2 px-4 py-2 bg-forest-green/20 rounded-full">
+                    <Droplets className="w-4 h-4 text-electric-cyan" />
+                    <span className="text-sm text-gray-300">Water Recycling</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-4 py-2 bg-forest-green/20 rounded-full">
+                    <Sun className="w-4 h-4 text-electric-cyan" />
+                    <span className="text-sm text-gray-300">Solar Powered</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-4 py-2 bg-forest-green/20 rounded-full">
+                    <Leaf className="w-4 h-4 text-electric-cyan" />
+                    <span className="text-sm text-gray-300">Peat-Free Since 2022</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -536,26 +740,26 @@ export default function GreenwoodDemo() {
             <div className="relative">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-electric-cyan/10 border border-electric-cyan/30 rounded-full text-sm text-electric-cyan mb-6">
                 <Truck className="w-4 h-4" />
-                <span>EU-Wide Delivery Available</span>
+                <span>Phytosanitary Certificates Handled Internally</span>
               </div>
 
               <h3 className="text-2xl md:text-4xl font-bold text-white mb-4">
-                Ready to Transform Your Space?
+                Ready for Your Next Planting Project?
               </h3>
 
               <p className="text-base md:text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
-                From initial consultation to final installation—get a tailored quote
-                for your commercial landscaping or wholesale plant needs.
+                From specimen sourcing to contract growing—get a tailored quote for your
+                infrastructure, commercial, or public realm planting scheme.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-electric-cyan to-forest-green text-white font-semibold rounded-full hover:shadow-lg hover:shadow-electric-cyan/20 transition-all">
                   <Mail className="w-5 h-5" />
-                  <span>Request Quote</span>
+                  <span>Request Planting Quote</span>
                 </button>
                 <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-transparent border border-white/20 text-white font-medium rounded-full hover:bg-white/5 transition-all">
                   <Phone className="w-5 h-5" />
-                  <span>Call Sales Team</span>
+                  <span>Speak to a Specialist</span>
                 </button>
               </div>
             </div>
@@ -577,45 +781,54 @@ export default function GreenwoodDemo() {
               </div>
             </div>
 
+            <div className="flex items-center gap-4 text-xs text-gray-500">
+              <span className="flex items-center gap-1">
+                <Shield className="w-3 h-3" />
+                Plant Healthy Certified
+              </span>
+              <span>•</span>
+              <span>HTA Peat-Free Grower of the Year</span>
+            </div>
+
             <div className="flex items-center gap-6 text-sm text-gray-400">
               <a href="#" className="hover:text-electric-cyan transition-colors">Privacy</a>
               <a href="#" className="hover:text-electric-cyan transition-colors">Terms</a>
-              <a href="#" className="hover:text-electric-cyan transition-colors">Cookies</a>
+              <a href="#" className="hover:text-electric-cyan transition-colors">Biosecurity</a>
               <a href="#" className="hover:text-electric-cyan transition-colors">Careers</a>
             </div>
           </div>
         </div>
       </footer>
 
-      {/* Floating Chat Widget - The Genetic Agent */}
+      {/* Floating Chat Widget - The Genetic Plant Specialist */}
       {showChatBubble && !chatOpen && (
         <button
           onClick={() => setChatOpen(true)}
           className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-forest-green to-forest-dark border border-electric-cyan/40 rounded-full shadow-lg shadow-electric-cyan/20 hover:shadow-electric-cyan/40 transition-all group animate-bounce"
         >
           <div className="relative">
-            <MessageCircle className="w-6 h-6 text-electric-cyan" />
+            <FlaskConical className="w-6 h-6 text-electric-cyan" />
             <span className="absolute -top-1 -right-1 w-3 h-3 bg-electric-cyan rounded-full animate-pulse" />
           </div>
           <span className="text-white text-sm font-medium hidden sm:block">
-            24/7 Assistant
+            Plant Specialist
           </span>
         </button>
       )}
 
-      {/* Chat Modal */}
+      {/* Chat Modal - Genetic Plant Specialist */}
       {chatOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-[calc(100%-3rem)] sm:w-96 max-h-[80vh] bg-greenwood-dark border border-forest-green/40 rounded-2xl shadow-2xl shadow-black/50 flex flex-col overflow-hidden">
+        <div className="fixed bottom-6 right-6 z-50 w-[calc(100%-3rem)] sm:w-[420px] max-h-[80vh] bg-greenwood-dark border border-forest-green/40 rounded-2xl shadow-2xl shadow-black/50 flex flex-col overflow-hidden">
           {/* Chat Header */}
           <div className="flex items-center justify-between p-4 bg-gradient-to-r from-forest-green to-forest-dark border-b border-forest-green/40">
             <div className="flex items-center gap-3">
               <div className="relative p-2 bg-electric-cyan/20 rounded-xl">
-                <Bot className="w-5 h-5 text-electric-cyan" />
+                <FlaskConical className="w-5 h-5 text-electric-cyan" />
                 <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 rounded-full border-2 border-forest-dark" />
               </div>
               <div>
-                <h4 className="text-white font-semibold text-sm">Greenwood 24/7 Assistant</h4>
-                <p className="text-[10px] text-electric-cyan">Powered by AI • Always Online</p>
+                <h4 className="text-white font-semibold text-sm">Genetic Plant Specialist</h4>
+                <p className="text-[10px] text-electric-cyan">Soil types • Hardiness zones • Biosecurity</p>
               </div>
             </div>
             <button
@@ -631,30 +844,43 @@ export default function GreenwoodDemo() {
             {/* Welcome message */}
             <div className="flex gap-3">
               <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-electric-cyan/20 flex items-center justify-center">
-                <Bot className="w-4 h-4 text-electric-cyan" />
+                <FlaskConical className="w-4 h-4 text-electric-cyan" />
               </div>
               <div className="flex-1">
                 <div className="bg-greenwood-card border border-forest-green/30 rounded-2xl rounded-tl-sm p-3">
                   <p className="text-sm text-gray-300">
-                    Hello! I&apos;m the Greenwood AI assistant. I can help you with stock
-                    queries, quotes, and delivery information 24/7. How can I help?
+                    Good evening! I&apos;m the Greenwood Plant Specialist. I can help with:
                   </p>
+                  <ul className="mt-2 space-y-1 text-sm text-gray-400">
+                    <li className="flex items-center gap-2">
+                      <TreePine className="w-3 h-3 text-electric-cyan" />
+                      <span>Species selection for specific conditions</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Wind className="w-3 h-3 text-electric-cyan" />
+                      <span>Hardiness zones & microclimate advice</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Shield className="w-3 h-3 text-electric-cyan" />
+                      <span>Biosecurity & phytosanitary queries</span>
+                    </li>
+                  </ul>
                 </div>
                 <span className="text-[10px] text-gray-500 mt-1 block">23:46</span>
               </div>
             </div>
 
-            {/* Mock conversation */}
+            {/* Mock conversation - technical planting query */}
             {mockConversation.map((msg, index) => (
               <div key={index} className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
                 {msg.role === "assistant" && (
                   <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-electric-cyan/20 flex items-center justify-center">
-                    <Bot className="w-4 h-4 text-electric-cyan" />
+                    <FlaskConical className="w-4 h-4 text-electric-cyan" />
                   </div>
                 )}
                 <div className={`flex-1 ${msg.role === "user" ? "flex flex-col items-end" : ""}`}>
                   <div
-                    className={`rounded-2xl p-3 max-w-[85%] ${
+                    className={`rounded-2xl p-3 max-w-[90%] ${
                       msg.role === "user"
                         ? "bg-electric-cyan/20 border border-electric-cyan/30 rounded-tr-sm"
                         : "bg-greenwood-card border border-forest-green/30 rounded-tl-sm"
@@ -671,7 +897,7 @@ export default function GreenwoodDemo() {
             {isTyping && (
               <div className="flex gap-3">
                 <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-electric-cyan/20 flex items-center justify-center">
-                  <Bot className="w-4 h-4 text-electric-cyan" />
+                  <FlaskConical className="w-4 h-4 text-electric-cyan" />
                 </div>
                 <div className="bg-greenwood-card border border-forest-green/30 rounded-2xl rounded-tl-sm p-3">
                   <div className="flex gap-1">
@@ -691,7 +917,7 @@ export default function GreenwoodDemo() {
                 type="text"
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
-                placeholder="Ask about stock, delivery, or quotes..."
+                placeholder="Ask about species, soil types, or hardiness..."
                 className="flex-1 px-4 py-2.5 bg-greenwood-dark border border-forest-green/40 rounded-full text-sm text-white placeholder-gray-500 focus:outline-none focus:border-electric-cyan/50"
               />
               <button
@@ -707,7 +933,7 @@ export default function GreenwoodDemo() {
               </button>
             </div>
             <p className="text-[10px] text-gray-500 text-center mt-2">
-              AI responses are for demo purposes only
+              After-hours queries forwarded to specialists at 07:00
             </p>
           </div>
         </div>
