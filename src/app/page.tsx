@@ -214,8 +214,23 @@ export default function GreenwoodDemo() {
 
   return (
     <div className="min-h-screen bg-greenwood-dark">
-      {/* Header / Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-greenwood-dark/95 backdrop-blur-md border-b border-forest-green/30">
+      {/* Plant Healthy Notification Bar - Top of page */}
+      <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-green-900 via-green-800 to-green-900 border-b border-green-600/50">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-3">
+          <Shield className="w-4 h-4 text-green-300" />
+          <p className="text-xs md:text-sm text-green-100 font-medium">
+            <span className="font-bold text-white">Proudly Plant Healthy Certified</span>
+            <span className="hidden sm:inline"> — Protecting UK & International Biosecurity</span>
+          </p>
+          <div className="hidden md:flex items-center gap-1 px-2 py-0.5 bg-green-700/50 rounded-full">
+            <CheckCircle2 className="w-3 h-3 text-green-300" />
+            <span className="text-[10px] text-green-200">All 6 UK Sites Audited</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Header / Navigation - adjusted for notification bar */}
+      <header className="fixed top-[36px] md:top-[40px] left-0 right-0 z-50 bg-greenwood-dark/95 backdrop-blur-md border-b border-forest-green/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
@@ -318,15 +333,25 @@ export default function GreenwoodDemo() {
         </div>
       </header>
 
-      {/* Hero Section - Specimen Nursery Aesthetic */}
-      <section className="relative pt-24 md:pt-32 pb-16 md:pb-24 overflow-hidden">
-        {/* Background - Nursery/botanical aesthetic */}
+      {/* Hero Section - Specimen Nursery Aesthetic with Macro Botanical */}
+      <section className="relative pt-32 md:pt-40 pb-16 md:pb-24 overflow-hidden">
+        {/* Background - High-res macro botanical imagery */}
         <div className="absolute inset-0">
+          {/* Macro leaf texture - premium horticultural feel */}
           <div
-            className="absolute inset-0 bg-cover bg-center opacity-20"
-            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920&h=1080&fit=crop')" }}
+            className="absolute inset-0 bg-cover bg-center opacity-15"
+            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1509587584298-0f3b3a3a1797?w=1920&h=1080&fit=crop')" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-greenwood-dark via-greenwood-dark/95 to-forest-dark" />
+          {/* Gradient overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-br from-greenwood-dark via-greenwood-dark/98 to-forest-dark" />
+          {/* Subtle leaf vein pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L50 100 M25 25 L50 50 L75 25 M25 75 L50 50 L75 75' stroke='%2300d4ff' stroke-width='0.5' fill='none'/%3E%3C/svg%3E")`,
+              backgroundSize: '60px 60px'
+            }}
+          />
         </div>
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-electric-cyan/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-forest-green/10 rounded-full blur-3xl" />
@@ -784,6 +809,78 @@ export default function GreenwoodDemo() {
         </div>
       </section>
 
+      {/* ISO 14001 Progress Bar - The Hook for Consultancy */}
+      <section className="py-12 md:py-16 bg-greenwood-card/20 border-y border-forest-green/30">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-electric-cyan/10 border border-electric-cyan/30 rounded-full text-xs text-electric-cyan mb-4">
+              <TrendingUp className="w-3 h-3" />
+              <span>Environmental Management Roadmap</span>
+            </div>
+            <h3 className="text-xl md:text-2xl font-bold text-white">
+              Journey to ISO 14001 Certification
+            </h3>
+            <p className="text-sm text-gray-400 mt-2">
+              Building on our Plant Healthy foundation towards full environmental accreditation
+            </p>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="relative">
+            {/* Progress Track */}
+            <div className="h-3 bg-greenwood-dark rounded-full overflow-hidden border border-forest-green/30">
+              <div
+                className="h-full bg-gradient-to-r from-green-500 via-electric-cyan to-electric-cyan/50 rounded-full transition-all duration-1000"
+                style={{ width: '65%' }}
+              />
+            </div>
+
+            {/* Milestones */}
+            <div className="flex justify-between mt-6">
+              <div className="flex flex-col items-center">
+                <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center mb-2">
+                  <CheckCircle2 className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-xs text-white font-medium">Plant Healthy</span>
+                <span className="text-[10px] text-green-400">Achieved 2024</span>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center mb-2">
+                  <CheckCircle2 className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-xs text-white font-medium">100% Peat-Free</span>
+                <span className="text-[10px] text-green-400">Achieved 2022</span>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <div className="w-10 h-10 rounded-full bg-electric-cyan flex items-center justify-center mb-2 animate-pulse">
+                  <Sparkles className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-xs text-white font-medium">Gap Analysis</span>
+                <span className="text-[10px] text-electric-cyan">In Progress</span>
+              </div>
+
+              <div className="flex flex-col items-center opacity-60">
+                <div className="w-10 h-10 rounded-full bg-forest-green/50 border-2 border-dashed border-forest-green flex items-center justify-center mb-2">
+                  <Leaf className="w-5 h-5 text-gray-400" />
+                </div>
+                <span className="text-xs text-gray-400 font-medium">ISO 14001</span>
+                <span className="text-[10px] text-gray-500">Target 2025</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Supporting Message */}
+          <div className="mt-8 p-4 bg-greenwood-dark/50 border border-forest-green/30 rounded-xl text-center">
+            <p className="text-sm text-gray-400">
+              <span className="text-electric-cyan font-medium">The Management System Behind the Plants:</span>{" "}
+              We don&apos;t just show you the plant; we show the management system that grew it sustainably.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -949,7 +1046,7 @@ export default function GreenwoodDemo() {
 
           {/* Chat Messages */}
           <div className="flex-1 p-4 space-y-4 overflow-y-auto min-h-[300px] max-h-[400px]">
-            {/* Welcome message */}
+            {/* Welcome message - Updated with International Logistics */}
             <div className="flex gap-3">
               <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-electric-cyan/20 flex items-center justify-center">
                 <FlaskConical className="w-4 h-4 text-electric-cyan" />
@@ -957,22 +1054,29 @@ export default function GreenwoodDemo() {
               <div className="flex-1">
                 <div className="bg-greenwood-card border border-forest-green/30 rounded-2xl rounded-tl-sm p-3">
                   <p className="text-sm text-gray-300">
-                    Good evening! I&apos;m the Greenwood Plant Specialist. I can help with:
+                    Good evening! Welcome to <span className="text-electric-cyan font-medium">Greenwood Group</span>. I&apos;m your 24/7 Plant Specialist with full access to our UK & Holland logistics network.
                   </p>
-                  <ul className="mt-2 space-y-1 text-sm text-gray-400">
+                  <ul className="mt-3 space-y-1.5 text-sm text-gray-400">
                     <li className="flex items-center gap-2">
-                      <TreePine className="w-3 h-3 text-electric-cyan" />
-                      <span>Species selection for specific conditions</span>
+                      <Globe className="w-3 h-3 text-electric-cyan" />
+                      <span>International logistics & phytosanitary support</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <Wind className="w-3 h-3 text-electric-cyan" />
-                      <span>Hardiness zones & microclimate advice</span>
+                      <TreePine className="w-3 h-3 text-electric-cyan" />
+                      <span>Species selection for specific site conditions</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <Shield className="w-3 h-3 text-electric-cyan" />
-                      <span>Biosecurity & phytosanitary queries</span>
+                      <span>Plant Healthy biosecurity queries</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Truck className="w-3 h-3 text-electric-cyan" />
+                      <span>Holland-to-UK delivery coordination</span>
                     </li>
                   </ul>
+                  <p className="mt-3 text-xs text-gray-500 italic">
+                    After-hours enquiries are pre-qualified and forwarded to your dedicated account manager at 07:00.
+                  </p>
                 </div>
                 <span className="text-[10px] text-gray-500 mt-1 block">23:46</span>
               </div>
